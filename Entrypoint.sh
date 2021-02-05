@@ -4,17 +4,21 @@
 # IMPORTANT: If this file is changed, docker container needs to be rebuilt
 
 # globals
-PYTHON_VERSION='python2.7'
+PYTHON_VERSION='python'
 PYTHON_PATH=`which $PYTHON_VERSION`
 BASE='/home/docker/tbcrawl'
 
 # set offloads
-ifconfig $2 mtu 1500
+#ifconfig $2 mtu 1500
+ip link set dev $2 mtu 1500
 ethtool -K $2 tx off rx off tso off gso off gro off lro off
 
-# install python requirements
+# set base directory
 pushd ${BASE}
-pip install -U -r requirements.txt
+
+# re-install python requirements
+# this step is only necessary if you've updated the requirements since building
+#pip install -U -r requirements.txt
 
 # copy tor browser bundle
 rm -rf tor-browser_en-US

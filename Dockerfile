@@ -2,7 +2,7 @@
 
 # Pull base image.
 #FROM debian:stable-slim
-FROM python:2.7
+FROM python:3
 
 # Install required packages.
 RUN apt-get update
@@ -23,13 +23,13 @@ RUN pip install -r /tmp/requirements.txt
 RUN adduser --system --group --disabled-password --gecos '' --shell /bin/bash docker
 
 # download geckodriver
-ADD https://github.com/mozilla/geckodriver/releases/download/v0.23.0/geckodriver-v0.23.0-linux64.tar.gz /bin/
+ADD https://github.com/mozilla/geckodriver/releases/download/v0.29.0/geckodriver-v0.29.0-linux64.tar.gz /bin/
 RUN tar -zxvf /bin/geckodriver* -C /bin/
 ENV PATH /bin/geckodriver:$PATH
 
 # add setup.py
-RUN git clone https://gist.github.com/notem/4242fe5c7f8dd6c443cab3d4ca38b85b.git /home/docker/tbb_setup
-RUN python /home/docker/tbb_setup/setup.py 8.0.2
+COPY setup.py /home/docker/tbb_setup/setup.py
+RUN python /home/docker/tbb_setup/setup.py 10.0.10
 
 # Set the display
 ENV DISPLAY $DISPLAY

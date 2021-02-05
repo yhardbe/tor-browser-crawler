@@ -25,7 +25,7 @@ VOLUMES = \
 
 
 # network interface on which to listen
-DEVICE=ens33
+DEVICE=eno1
 
 # commandline arguments
 CRAWL_PARAMS=-c wang_and_goldberg -u ./sites.txt --timeout 2 -s -d ${DEVICE} -v
