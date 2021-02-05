@@ -7,7 +7,7 @@ This is a fork of the [tor-browser-crawler](https://github.com/webfp/tor-browser
 ## Usage
 
 This project may be run natively on the host system or in a docker container.
-If running natively, the required libraries and python 2.7 modules must be installed.
+If running natively, the required libraries and python 3.X modules must be installed.
 Reference the ``Dockerfile`` and ``requirements.txt`` for the list of requirements.
 Running through docker is easier and more reproducible. 
 As such, this section will focus on the docker container setup.
@@ -21,7 +21,7 @@ As such, this section will focus on the docker container setup.
     * run ``make build`` to compile the docker image
 3. Setup your crawl configuration files
     * replace ``sites.txt`` with the list of websites you wish to crawl
-    * edit ``Makefile`` to use the correct network interface
+    * edit ``Makefile`` to use the correct network interface of your host
     * adjust the ``--timeout`` value in the ``Makefile`` to higher values if needed
     * make any desired changes to ``config.ini`` 
 4. Start the crawl
@@ -31,7 +31,7 @@ As such, this section will focus on the docker container setup.
 ## Notes
 * Library Versions
     * versions of some components are important as different version combinations may be incompatible
-    * this project has been frozen to **v8.0.2** of the TBB
+    * this project has been frozen to **v10.0.10** of the TBB
     * to use the latest TBB version, remove the version number from the ``dockerfile``
     * newer versions of TBB may however require different version of selenium and geckodriver
 
