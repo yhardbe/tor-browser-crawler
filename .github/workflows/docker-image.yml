@@ -1,0 +1,46 @@
+name: Docker Image CI
+env:
+  IMAGE_NAME: testtor #这是您的镜像名
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+  #  - uses: actions/checkout@v3
+  #  - name: Build the Docker image
+  #    run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+
+   # - uses: actions/checkout@v2
+   # - name: Login
+    #  uses: docker/login-action@v1
+   #   with:
+    #    username: ${{ secrets.DNAME }}
+   #     password: ${{ secrets.DPASS }}
+   # - name: Build && Push
+    #  uses: docker/build-push-action@v4
+     # with:
+     #   context: .
+      #  file: Dockerfile
+      #  push: true
+     #   tags: |
+      #    ${{ secrets.DNAME }}/${{ env.IMAGE_NAME }}
+      #    ${{ secrets.DNAME }}/${{ env.IMAGE_NAME }}:latest
+          
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+      run: |
+        docker version
+        # 登录阿里云镜像仓库
+        docker login --username=${{ secrets.DALINAME }} --password=${{ secrets.DALIPASS}} registry.cn-hangzhou.aliyuncs.com
+        # 使用Dockerfile构建镜像
+        docker build . --file Dockerfile --tag registry.cn-hangzhou.aliyuncs.com/yamojito/torzzz:0.4
+        # 推送镜像到镜像仓库
+        docker push registry.cn-hangzhou.aliyuncs.com/yamojito/torzzz:0.4
